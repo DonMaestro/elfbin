@@ -176,7 +176,6 @@ int main(int argc, char **argv)
 	//struct list_t *pos;
 	//struct list_t *t;
 	struct arguments arguments;
-	struct list_t list = LIST_T_INIT(list);
 
 	/* Set arguments defaults */
 	arguments.file = "main";
@@ -195,13 +194,6 @@ int main(int argc, char **argv)
 
 	set_addr(&elf, arguments.addr);
 	write_output(&elf, arguments.output);
-/*
-	state = write_database(arguments.file, &list);
-	if (STATE_OK != state) {
-		print_error(state, arguments.verbose);
-		goto dealloc_list;
-	}
-*/
 
 	free(elf.header);
 	free(elf.symbol);
@@ -211,15 +203,6 @@ int main(int argc, char **argv)
 	free(elf.strtab);
 	free(elf.shstrtab);
 
-//dealloc_list:
-/*
-	list_for_each_safe(pos, t, &list) {
-		temp = container_of(pos, struct database, list);
-
-		list_del(pos);
-		free_database(temp);
-	}
-*/
 end:
 	exit(state);
 }
